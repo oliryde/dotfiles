@@ -27,9 +27,10 @@ set $rightScreen DVI-0
 font  pango:DejaVu Sans Mono, Terminus Bold Semi-Condensed 8
 
 # XFCE4-terminal things
-for_window [class="Termite"] border pixel 4
+for_window [class="Terminator"] border pixel 2
 for_window [class="Chromium"] border pixel 0
 for_window [class="Pavucontrol"] floating enable
+for_window [class="zeal"] floating enable
 
 # Scratch?
 # Make the currently focused window a scratchpad
@@ -41,34 +42,41 @@ bindsym $mod+minus scratchpad show
 bindsym $mod+m exec ruby /home/krobar/src/pivotal_copy/test2.rb otr
 
 # Music
-bindsym XF86AudioPlay exec cmus-remote -u
-bindsym XF86AudioNext exec cmus-remote -n
-bindsym XF86AudioPrev exec cmus-remote -r
-bindsym XF86AudioStop exec cmus-remote -s
+#bindsym XF86AudioPlay exec cmus-remote -u
+#bindsym XF86AudioNext exec cmus-remote -n
+#bindsym XF86AudioPrev exec cmus-remote -r
+#bindsym XF86AudioStop exec cmus-remote -s
 
 #bindsym XF86AudioPlay exec mocp -G
 #bindsym XF86AudioNext exec mocp -f
 #bindsym XF86AudioPrev exec mocp -r
 #bindsym XF86AudioStop exec mocp -s
 
+bindsym XF86AudioPlay exec mpc toggle
+bindsym XF86AudioNext exec mpc next
+bindsym XF86AudioPrev exec mpc prev
+bindsym XF86AudioStop exec mpc stop
+
 # Screenshot
 bindsym Print exec scrot
 bindsym Mod1+Print exec scrot -s
 
 # Volume
-bindsym XF86AudioRaiseVolume exec amixer -q set Master 2%+
-bindsym XF86AudioLowerVolume exec amixer -q set Master 2%-
+#bindsym XF86AudioRaiseVolume exec mpc volume +1
+#bindsym XF86AudioLowerVolume exec mpc volume -1
 bindsym XF86AudioMute exec amixer -q set Master toggle
+bindsym XF86AudioLowerVolume exec amixer -q set Master 1%-
+bindsym XF86AudioRaiseVolume exec amixer -q set Master 1%+
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec termite
+bindsym $mod+Return exec terminator
 # start a browser
 bindsym $mod+w exec "chromium --disk-cache-dir=/tmp/cache"
 # lock screen
-bindsym $mod+l exec i3lock -c 000000 -d
+bindsym $mod+l exec i3lock-fancy -c 000000 -d
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -140,6 +148,16 @@ bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
+bindsym $mod+KP_1 workspace 1
+bindsym $mod+KP_2 workspace 2
+bindsym $mod+KP_3 workspace 3
+bindsym $mod+KP_4 workspace 4
+bindsym $mod+KP_5 workspace 5
+bindsym $mod+KP_6 workspace 6
+bindsym $mod+KP_7 workspace 7
+bindsym $mod+KP_8 workspace 8
+bindsym $mod+KP_9 workspace 9
+bindsym $mod+KP_0 workspace 10
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
 bindsym $mod+Shift+2 move container to workspace 2
@@ -191,6 +209,10 @@ mode "resize" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
+
+pulseaudio --start
+mpdscribble
+
 
 bindsym $mod+r mode "resize"
 
